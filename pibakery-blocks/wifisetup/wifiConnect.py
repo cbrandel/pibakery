@@ -35,8 +35,11 @@ wifiSSID = sys.argv[1]
 wifiPSK = sys.argv[2]
 wifiType = sys.argv[3]
 wifiCountry = ""
-if sys.argv.len() > 3 and sys.argv[4] != "":
-    wifiCountry = "country=" + sys.argv[4][0:2]
+if len(sys.argv) > 3 and sys.argv[4] != "":
+    if "-" in sys.argv[4] and sys.argv[4][0:sys.argv[4].find("-")] != "":
+        wifiCountry = "country=" + sys.argv[4][0:sys.argv[4].find("-")]
+    else:
+        wifiCountry = ""
 
 if wifiSSID != "" and wifiType != "":
 	if wifiPSK == "" or wifiType == "Open (no password)":
