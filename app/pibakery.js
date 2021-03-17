@@ -67,6 +67,13 @@ var tempBlocks = []
 var blockSupportedOs = {}
 var categoryTypeText = ['hat']
 var categoryTypeColour = [20]
+/**
+  * use a different repo for blocks
+*/
+var gitHubAccount = 'davidferguson'
+var gitHubBaseUrl = 'https://raw.githubusercontent.com/' + gitHubAccount
+var gitHubBlocksRepo = 'pibakery-blocks'
+var gitHubRaspianRepo = 'pibakery-raspbian'
 
 /**
   * @desc checks that the os and blocks exist, and sets up PiBakery
@@ -157,7 +164,7 @@ function fixBlocks () {
       writeButton.setAttribute('id', 'writeButton')
       writeButton.innerHTML = 'Attempt Fix'
       writeButton.addEventListener('click', function () {
-        request.get('https://raw.githubusercontent.com/davidferguson/pibakery-blocks/master/info.json', function (error, response, body) {
+        request.get(gitHubBaseUrl + '/' + gitHubBlocksRepo + '/master/info.json', function (error, response, body) {
           if (error) {
             console.error(error)
             return
@@ -249,7 +256,7 @@ function checkForBlockUpdates () {
       return
     }
     var myBlocksVersion = JSON.parse(data).version
-    request.get('https://raw.githubusercontent.com/davidferguson/pibakery-blocks/master/info.json', function (error, response, body) {
+    request.get(gitHubBaseUrl + '/' + gitHubBlocksRepo + '/master/info.json', function (error, response, body) {
       if (error) {
         console.error(error)
         return
